@@ -34,7 +34,7 @@ h2 {
 .description::after {
     content: "";
     position: absolute;
-    bottom: 164.1325px;
+    bottom: -28.8675px;
     width: 0;
     height: 0px;
     border-left: 45px solid transparent;

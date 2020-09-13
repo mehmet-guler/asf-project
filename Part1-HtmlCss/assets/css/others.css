@@ -33,3 +33,8 @@
 .border-top-red {
     border-top: 2px solid var(--red);
 }
+
+h4 {
+    font-size: 25px;
+    margin-bottom: 0;
+}
