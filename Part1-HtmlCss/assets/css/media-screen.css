@@ -51,3 +51,27 @@
         padding: 0px;
     }
 }
+
+@media screen and (max-width: 992px) {
+    .header {
+        min-height: 50px;
+        background-color:var(--white) !important;
+    }
+
+    .navbar-toggler{
+        border: 1.5px solid var(--grey-dark) !important;
+    }
+    .flex-container {
+        flex-direction: column;
+    }
+    .segment-item,
+    .segment-details-item,
+    .guestbook-entries,
+    .guestbook-form {
+        width: auto !important;
+    }
+    .header {
+        padding: 0px;
+    }
+
+}

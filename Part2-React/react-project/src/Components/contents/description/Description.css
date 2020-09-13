@@ -33,6 +33,7 @@ h2 {
 
 .description h1 {
     color: var(--gray);
+    font-size: 2em !important;
 }
 
 .description p {

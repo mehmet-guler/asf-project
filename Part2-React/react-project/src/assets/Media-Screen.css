@@ -1,13 +1,17 @@
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 600px) {
     .header {
         min-height: 50px;
-        background-color:var(--white);
+        background-color:var(--white) !important;
     }
 
     .navbar {
         display: block;
         padding-top: 0px;
         background-color: var(--gray);
+    }
+
+    .navbar-toggler{
+        border: 1.5px solid var(--grey-dark) !important;
     }
 
     .menu,
@@ -42,4 +46,29 @@
     .header {
         padding: 0px;
     }
+}
+
+
+@media screen and (max-width: 992px) {
+    .header {
+        min-height: 50px;
+        background-color:var(--white) !important;
+    }
+
+    .navbar-toggler{
+        border: 1.5px solid var(--grey-dark) !important;
+    }
+    .flex-container {
+        flex-direction: column;
+    }
+    .segment-item,
+    .segment-details-item,
+    .guestbook-entries,
+    .guestbook-form {
+        width: auto !important;
+    }
+    .header {
+        padding: 0px;
+    }
+
 }
