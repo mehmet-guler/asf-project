@@ -5,7 +5,8 @@
   src: url("../fonts/AvenirPro/AvenirNextLTPro-Thin.otf");
 }
 body {
-  font-family: Avenir !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
   font-size: 1.1rem !important;
   margin: 0;
   line-height: 1.5;

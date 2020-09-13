@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './GuestBook.css';
 
-function GuestBookForm({onAddNewEntry}) {
+function GuestBookForm({ onAddNewEntry }) {
 
     const validationMessages = {
         MINLENGTH: "This field must have a minimum of ",
@@ -17,9 +17,9 @@ function GuestBookForm({onAddNewEntry}) {
 
     const checkValidationAndSendData = (event) => {
         event.preventDefault();
-        if(errors.length>0) return;
-        else{
-            const newEntry = {id:new Date().getTime()+Math.random(),name:name,subject:subject,message:message,date:new Date().getTime()}
+        if (errors.length > 0) return;
+        else {
+            const newEntry = { id: new Date().getTime() + Math.random(), name: name, subject: subject, message: message, date: new Date().getTime() }
             onAddNewEntry(newEntry);
 
             setName("");
@@ -65,7 +65,6 @@ function GuestBookForm({onAddNewEntry}) {
 
     return (
         <div className="guestbook-form text-center">
-<button className="btn btn-primary" onClick={()=>console.log("asd",new Date().getTime())}>asdas</button>
             <form onSubmit={checkValidationAndSendData}>
                 <div className="form-group">
                     <input onBlur={() => onSetName(name)} type="text" className="form-control" placeholder="Name" value={name} onChange={(event) => onSetName(event.target.value)} />
