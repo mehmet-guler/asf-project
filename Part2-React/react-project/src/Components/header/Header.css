@@ -1,0 +1,14 @@
+@import url("../../index.css");
+
+.header {
+    background-color: var(--grey-dark) !important;
+}
+
+.header .nav-link {
+    color: var(--black) !important;
+    font-weight: bold;
+}
+
+.header .nav-link:hover {
+    color: var(--white) !important;
+}

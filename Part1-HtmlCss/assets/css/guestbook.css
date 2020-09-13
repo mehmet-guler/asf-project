@@ -1,0 +1,56 @@
+.guestbook {
+    background-color: var(--grey-dark);
+    padding: 25px;
+}
+
+.guestbook h1{
+    color: var(--grey-ligth);
+}
+
+.guestbook-form {
+    background-color: var(--black);
+    border-radius: 3px;
+    width: 40%;
+    margin: 20px;
+    padding: 15px;
+}
+
+.guestbook-entries {
+    width: 60%;
+    margin: 20px;
+    background-color: var(--black);
+    border-radius: 3px;
+    padding: 15px;
+    max-height: 300px;
+    overflow: auto;
+}
+
+.form-control {
+    width: 100%;
+    border-radius: 3px;
+    border-width: 0px;
+    padding: 5px 0;
+    margin-bottom: 15px;
+    line-height: 2;
+}
+
+.entry {
+    background-color: var(--white);
+    padding:0px 5px
+}
+
+.entry div{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 10px;
+}
+
+.username{
+    font-weight: bold;
+}
+
+.entry p {
+    margin-block-start: 5px;
+    margin-block-end: 5px;
+    text-align: left !important;
+}

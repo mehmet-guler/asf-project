@@ -1,0 +1,54 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+:root {
+  --custom-gray: red;
+}
+
+
+
+/* Default color, fontsize, font-family,padding margin etc. */
+
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans",
+    "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.1rem !important;
+  margin: 0;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* h1 {
+  margin-block-start: 0px;
+  margin-block-end: 0px;
+} */
+
+
+:root {
+  --white: #fff!important;
+  --black: #000 !important;
+  --gray: #666 !important;
+  --red: #a50606!important;
+  --green: #06af6d!important;
+--red-ligth:#e23737!important;
+  --grey: #808080!important;
+  --grey-dark: #424242!important;
+  --grey-tint: #b7b7b7!important;
+  --grey-ligth: #e9e9e9!important;
+}
+
+@import url('./assets/Media-Screen.css');
+@import url('./assets/Others.css')

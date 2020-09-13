@@ -1,0 +1,35 @@
+.button {
+    margin-top: auto;
+    text-transform: uppercase;
+    padding: 10px 14px;
+    margin: auto;
+    color: var(black);
+    border-radius: 3px;
+    border: none;
+    font-weight: bold;
+    margin-top:10px;
+}
+
+.green {
+    background-color: var(--green);
+}
+
+.gray {
+    background-color: var(--gray);
+}
+
+.red {
+    background-color: #e23737;
+}
+
+.border-top-green {
+    border-top: 2px solidvar(--green);
+}
+
+.border-top-gray {
+    border-top: 2px solid var(--gray);
+}
+
+.border-top-red {
+    border-top: 2px solid var(--red);
+}

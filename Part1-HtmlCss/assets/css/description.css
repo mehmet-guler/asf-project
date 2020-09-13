@@ -1,0 +1,44 @@
+.description {
+    background-color: var(--red);
+    position: relative;
+    padding-bottom: 25px;
+    padding: 50px;
+}
+
+.description h2 {
+    color: var(--grey-ligth);
+}
+
+.description h1,
+h2 {
+    text-transform: uppercase;
+}
+
+.description h1 {
+    color: var(--gray);
+}
+
+.description p {
+    color: var(--grey-tint);
+}
+
+.learn-more-button {
+    text-transform: uppercase;
+    padding: 15px;
+    color: var(--white);
+    background-color: var(--green);
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+.description::after {
+    content: "";
+    position: absolute;
+    bottom: 164.1325px;
+    width: 0;
+    height: 0px;
+    border-left: 45px solid transparent;
+    border-right: 45px solid transparent;
+    border-top: 28.8675px solid var(--red);
+    left: calc(50% - 44px);
+}

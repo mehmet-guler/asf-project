@@ -1,0 +1,129 @@
+
+/* HEXAGON SHAPE */
+.hexagon-green {
+    width: 100px;
+    height: 57.735px;
+    background: var(--green);
+    position: relative;
+    background-image: url("./laptop.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.hexagon-green::before {
+    content: "";
+    position: absolute;
+    top: -28.8675px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 28.8675px solid var(--green);
+}
+.hexagon-green::after {
+    content: "";
+    position: absolute;
+    bottom: -28.8675px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 28.8675px solid var(--green);
+}
+
+.hexagon-gray {
+    width: 100px;
+    height: 57.735px;
+    background: var(--gray);
+    position: relative;
+    background-image: url("./laptop.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.hexagon-gray::before {
+    content: "";
+    position: absolute;
+    top: -28.8675px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 28.8675px solid var(--gray);
+}
+.hexagon-gray::after {
+    content: "";
+    position: absolute;
+    bottom: -28.8675px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 28.8675px solid var(--gray);
+}
+
+.hexagon-red {
+    width: 100px;
+    height: 57.735px;
+    background: var(--red-ligth);
+    position: relative;
+    background-image: url("./laptop.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.hexagon-red::before {
+    content: "";
+    position: absolute;
+    top: -28.8675px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 28.8675px solid var(--red-ligth);
+}
+.hexagon-red::after {
+    content: "";
+    position: absolute;
+    bottom: -28.8675px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 28.8675px solid var(--red-ligth);
+}
+
+.hexagon {
+    width: 100px;
+    height: 80px;
+    background: var(--grey-dark);
+    position: absolute;
+    z-index: 9999;
+    left: calc(50% - 44px);
+}
+.hexagon::before {
+    content: "";
+    position: absolute;
+    top: -28.8675px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 28.8675px solid var(--grey-dark);
+}
+.hexagon::after {
+    content: "";
+    position: absolute;
+    bottom: -28.8675px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-top: 28.8675px solid var(--grey-dark);
+}
+/* ENF OF HEXAGON */

@@ -1,0 +1,14 @@
+.footer{
+    background-color: var(--black);
+    color: var(--gray);
+    font-weight: bold;
+}
+
+.footer label{
+    margin-bottom: 0;
+}
+
+.footer-menu .list-group-item {
+    border: none;
+    background-color: transparent;
+}

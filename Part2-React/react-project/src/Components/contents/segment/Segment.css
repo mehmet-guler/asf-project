@@ -1,0 +1,97 @@
+.segment {
+    background-color: #f9f3f3;
+    padding-top: 45px;
+}
+
+.segment h1 {
+    color: #c5c3c3;
+    text-shadow: 1px 1px lightgrey;
+}
+h4 {
+    font-size: 25px;
+    margin-bottom: 0;
+}
+
+.segment-item p {
+    color: #c1c1c1;
+}
+
+.flex-container {
+    display: flex;
+}
+.segment-item {
+    margin: 10px;
+    padding: 45px;
+    font-size: 30px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.segment-item p {
+    font-size: 14px;
+}
+
+.segment-details {
+    background-color: #e6e6e6;
+    position: relative;
+}
+
+.segment-details::before {
+    content: "";
+    position: absolute;
+    top: -20px;
+    left: 15%;
+    width: 0;
+    height: 0px;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 20px solid #e6e6e6;
+}
+
+.segment-details-item {
+    background-color: #e2e0e0;
+    margin: 10px;
+    padding: 15px;
+    width: 100%;
+}
+
+.segment-details-item:hover {
+    background-color: #d6d2d2;
+}
+
+.segment-details-item ul {
+    list-style-type: none;
+    padding-inline-start: 0px;
+}
+.segment-details-item ul li {
+    float: left;
+}
+
+.list {
+    height: 300px;
+    overflow:auto;
+}
+
+.list > div {
+    text-align: left;
+}
+.border-top-green .list > div,
+.border-top-red .list > div {
+    border-bottom: 1px solid var(--grey-dark);
+    padding: 8px;
+}
+
+.list > div > p {
+    margin-block-start: 5px;
+    margin-block-end: 5px;
+}
+
+.list i {
+    color: var(--green);
+}
+.list label {
+    font-weight: bold;
+}
+

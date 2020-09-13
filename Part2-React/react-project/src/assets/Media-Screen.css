@@ -1,0 +1,45 @@
+@media screen and (max-width: 700px) {
+    .header {
+        min-height: 50px;
+        background-color:var(--white);
+    }
+
+    .navbar {
+        display: block;
+        padding-top: 0px;
+        background-color: var(--gray);
+    }
+
+    .menu,
+    .social-media {
+        overflow: hidden;
+        height: 0;
+        padding: 0px;
+    }
+
+    .navbar ul.open {
+        height: auto;
+        width: 100%;
+    }
+
+    .navbar ul li {
+        float: none;
+        padding: 5px;
+    }
+    .navbar ul li a {
+        color: var(--white);
+    }
+
+    .flex-container {
+        flex-direction: column;
+    }
+    .segment-item,
+    .segment-details-item,
+    .guestbook-entries,
+    .guestbook-form {
+        width: auto !important;
+    }
+    .header {
+        padding: 0px;
+    }
+}
