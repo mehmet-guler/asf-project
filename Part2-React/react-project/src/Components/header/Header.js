@@ -13,7 +13,7 @@ function Header() {
                     <Nav.Link href="#link">GUESTBOOK</Nav.Link>
                 </Nav>
 
-                <Nav className="ml-auto">
+                <Nav className="ml-auto social-media">
                     <Nav.Link href="#home"><i className="fa fa-facebook" aria-hidden="true"></i></Nav.Link>
                     <Nav.Link href="#home"><i className="fa fa-twitter" aria-hidden="true"></i></Nav.Link>
                     <Nav.Link href="#home"><i className="fa fa-instagram" aria-hidden="true"></i></Nav.Link>
