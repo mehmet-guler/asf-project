@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import './GuestBook.css';
 
 function GuestBookForm({ onAddNewEntry }) {
-
     const validationMessages = {
         MINLENGTH: "This field must have a minimum of ",
         MAXLENGTH: "You have exceeded the maximum number of characters.",
@@ -58,9 +57,12 @@ function GuestBookForm({ onAddNewEntry }) {
     }
 
     const getError = (name) => {
-        const error = errors.filter(error => error.name === name);
-        if (error.length > 0) return error;
-        else return false
+        if (errors.length > 0) {
+            const error = errors.filter(error => error.name === name);
+            if (error.length > 0) return error;
+            else return false
+        }
+        return false
     }
 
     return (
@@ -68,14 +70,14 @@ function GuestBookForm({ onAddNewEntry }) {
             <form onSubmit={checkValidationAndSendData}>
                 <div className="form-group">
                     <input onBlur={() => onSetName(name)} type="text" className="form-control" placeholder="Name" value={name} onChange={(event) => onSetName(event.target.value)} />
-                    {errors.length > 0 && getError("name") && < small className="form-text text-danger" >{getError("name")[0].message}</small>}
+                    {getError("name") && < small className="form-text text-danger" >{getError("name")[0].message}</small>}
                 </div>
                 <div className="form-group">
                     <input onBlur={() => onSetSubject(subject)} type="text" className="form-control" placeholder="Subject" value={subject} onChange={(event) => onSetSubject(event.target.value)} />
-                    {errors.length > 0 && getError("subject") && < small className="form-text text-danger" >{getError("subject")[0].message}</small>}
+                    {getError("subject") && < small className="form-text text-danger" >{getError("subject")[0].message}</small>}
                 </div>
                 <textarea onBlur={() => onSetMessage(message)} placeholder="Message" className="form-control" rows="4" cols="50" value={message} onChange={(event) => onSetMessage(event.target.value)}></textarea>
-                {errors.length > 0 && getError("message") && < small className="form-text text-danger" >{getError("message")[0].message}</small>}
+                {getError("message") && < small className="form-text text-danger" >{getError("message")[0].message}</small>}
                 <button className="button green" type="submit">SEND</button>
             </form>
         </div>
