@@ -42,7 +42,6 @@ function GuestBook() {
 
     const [entries, addNewEntry] = useState(initial_state);
 
-    // Component yüklendiğinde default entrileri localstorage'a yükledik çünküm silinmemesi için
     useEffect(() => {
         if (!localStorage.getItem("guestbook"))
             localStorage.setItem("guestbook", JSON.stringify(entries));
@@ -61,6 +60,16 @@ function GuestBook() {
             <div className="flex-container">
 
                 {/* New Generic Method */}
+                {
+                    /* I wrote GuestBookFormWithGenericFormComponent for to be readable this component*/
+                    /* Bu if we want we can create form hear */
+
+                    /* What is the advantage of create form hear ? */
+                    /* If we craete form in this component ,easier to reach form datas */
+                    
+                    /* So how do we access data now,if we want access data in parent component */
+                    /* Send a props and in the GuestBookFormWithGenericFormComponent return formRef to back */
+                }
                 <GuestBookFormWithGenericFormComponent onAddNewEntry={onAddNewEntry} />
 
                 {/* Old Method */}

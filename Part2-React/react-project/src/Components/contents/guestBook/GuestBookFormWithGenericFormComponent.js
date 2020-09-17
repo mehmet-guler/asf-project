@@ -2,16 +2,26 @@ import React from 'react';
 import Form from '../../genericForm/Form';
 import Input from '../../genericForm/Input';
 
+/* If we want to reach the form datas in parent component,create ref and pass to component.(the props name of ref must be formRef)  */
+/* Example : formRef.current.values */
 function GuestBookFormWithGenericFormComponent({ onAddNewEntry }) {
 
+    const formRef = React.createRef();
+
     const handleSubmit = ({ name, subject, message }) => {
-        const newEntry = { id: new Date().getTime() + Math.random(), name: name, subject: subject, message: message, date: new Date().getTime() }
+        const newEntry = {
+            id: new Date().getTime() + Math.random(),
+            name: name,
+            subject: subject,
+            message: message,
+            date: new Date().getTime()
+        };
         onAddNewEntry(newEntry);
     }
 
     return (
         <div className="guestbook-form text-center">
-            <Form doIt={handleSubmit} showErrorLabel={true} showStatusAlert={true}>
+            <Form doIt={handleSubmit} showErrorLabel={true} showStatusAlert={true} formRef={formRef}>
 
                 <div className="form-group">
                     <Input

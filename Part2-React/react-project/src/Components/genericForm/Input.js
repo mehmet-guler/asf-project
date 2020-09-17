@@ -1,55 +1,66 @@
 import React, { useContext, useImperativeHandle, useEffect, useState } from 'react'
 import { FormContext } from './Form';
 import ErrorLabel from './ErrorLabel';
-import * as Validation from './Validation';
+import * as ValidationHelper from './validationHelper';
 import * as DefaultValidationMessage from './DefaultValidationMessages';
+import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-function Input(props) {
+function Input({ name, validate, type, placeholder, rows, cols, options }) {
+
+    const formContext = useContext(FormContext);
+    const { generateRef, handleSetIsRender, onChange, removeError, handleSetErrors, isRender, errors, showErrorLabel } = formContext;
 
     const [value, setValue] = useState("")
     const [ref, setRef] = useState(null)
 
-    const formContext = useContext(FormContext);
+    // Ref must be set every time the component changes
+    useEffect(() => {
+        setRef(generateRef(name))
+    }, [setRef, generateRef, name])
 
 
+    // When input onblur check validation
+    const onBlur = (event) => {
+        checkValidationAndSetErrors(event.target.value);
+        handleSetIsRender(name, true);
+    }
+
+    // When input changed,check validation,set state,set input render
     const handleChange = event => {
         const inputValue = event.target.value;
-        formContext.onChange(props.name, inputValue);
+
+        // send data to Form component
+        onChange(name, inputValue);
+
+        // update the component state
         setValue(inputValue)
-        //validation
-        //validation(event)
-        formContext.handleSetIsRender(props.name, true);
+
+        // set input rendered true in Form component
+        handleSetIsRender(name, true);
+
+        // check validation for input value
         checkValidationAndSetErrors(inputValue);
-        // console.log(checkValidation(event.target.value))
     };
 
-
-    useImperativeHandle(ref, () => ({
-        checkValidation,
-        checkValidationAndSetErrors,
-        value
-    }));
-
-    useEffect(() => {
-        setRef(formContext.generateRef(props.name))
-    }, [setRef, formContext, props.name])
-
-    // onblur validation
-
-    // value={formContext.values[props.name]}
-
+    const checkValidationAndSetErrors = (inputValue) => {
+        const check = checkValidation(inputValue);
+        if (_.isEmpty(check))
+            removeError(name)
+        else
+            handleSetErrors(name, check)
+    }
 
     const checkValidation = (inputValue) => {
-        if (props.validate) {
-            const keys = Object.keys(props.validate);
+        if (validate) {
+            const keys = Object.keys(validate);
             const errors = {}
-            for (let i = 0; i < Object.keys(props.validate).length; i++) {
+            for (let i = 0; i < Object.keys(validate).length; i++) {
                 const key = keys[i]
-                const keyValue = typeof props.validate[key] === "object" ? props.validate[key]["value"] : props.validate[key];;
-                const message = typeof props.validate[key] === "object" && props.validate[key]["message"] ? props.validate[key]["message"] : DefaultValidationMessage[key];
-                if (key in Validation) {
-                    const validationResponse = Validation[key](inputValue, keyValue)
+                const keyValue = typeof validate[key] === "object" ? validate[key]["value"] : validate[key];;
+                const message = typeof validate[key] === "object" && validate[key]["message"] ? validate[key]["message"] : DefaultValidationMessage[key];
+                if (key in ValidationHelper) {
+                    const validationResponse = ValidationHelper[key](inputValue, keyValue)
                     if (!validationResponse) errors[key] = message;
                 }
             }
@@ -57,58 +68,48 @@ function Input(props) {
         }
     }
 
-    const checkValidationAndSetErrors = (inputValue) => {
-        const check = checkValidation(inputValue);
-        if (_.isEmpty(check))
-            formContext.removeError(props.name)
-        else
-            formContext.handleSetErrors(props.name, check)
-    }
-
-    const onBlur = (event) => {
-        checkValidationAndSetErrors(event.target.value);
-        formContext.handleSetIsRender(props.name, true);
-    }
-
     const getClassName = () => {
-        // if input is rendered and has a errors
-        if (!formContext.isRender[props.name]) return "";
+        if (!isRender[name]) return ""; // input not rendered.
         else {
-            if (formContext.errors[props.name]) return "is-invalid";
-            else return "is-valid";
+            if (errors[name]) return "is-invalid"; // if input is rendered and has a errors
+            else return "is-valid"; // if input is rendered and has not a errors
         }
     }
 
+    // get input types
     const getInput = () => {
-        switch (props.type) {
+        switch (type) {
             case "input":
-                return (<input
-                    name={props.name}
-                    className={"form-control " + getClassName()}
-                    onBlur={onBlur}
-                    onChange={handleChange}
-                    placeholder={props.placeholder} />)
-            case "textarea":
                 return (
-                    <textarea
-                        name={props.name}
+                    <input
+                        type="text" //for now i just allowed this type
+                        name={name}
                         className={"form-control " + getClassName()}
                         onBlur={onBlur}
                         onChange={handleChange}
-                        placeholder={props.placeholder}
-                        rows={props.rows}
-                        cols={props.cols}
+                        placeholder={placeholder} />
+                )
+            case "textarea":
+                return (
+                    <textarea
+                        name={name}
+                        className={"form-control " + getClassName()}
+                        onBlur={onBlur}
+                        onChange={handleChange}
+                        placeholder={placeholder}
+                        rows={rows}
+                        cols={cols}
                     ></textarea>
                 )
             case "select":
                 return (
                     <select
-                        name={props.name}
+                        name={name}
                         className={"form-control " + getClassName()}
                         onBlur={onBlur}
                         onChange={handleChange}
                     >
-                        {props.options.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
+                        {options.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
                     </select>
                 )
             default:
@@ -116,18 +117,49 @@ function Input(props) {
         }
     }
 
+    // for accessing data in parent component
+    useImperativeHandle(ref, () => ({
+        checkValidation,
+        checkValidationAndSetErrors,
+        value
+    }));
+
     return (
         <React.Fragment>
             {getInput()}
-            {/* <input
-                name={props.name}
-                className={"form-control " + getClassName()}
-                onBlur={onBlur}
-                onChange={handleChange}
-                placeholder={props.placeholder} /> */}
-            { formContext.showErrorLabel && <ErrorLabel formContext={formContext} name={props.name} />}
+            { showErrorLabel && <ErrorLabel formContext={formContext} name={name} />}
         </React.Fragment>
     )
 }
 
+Input.defaultProps = {
+    className: "",
+    type: "text",
+    placeholder: "",
+    rows: "4",
+    cols: "50",
+    options: []
+};
+
+Input.propTypes = {
+    className: PropTypes.string,
+    type: PropTypes.string,
+    name: PropTypes.string.isRequired,
+    validate: PropTypes.object,
+    placeholder: PropTypes.string,
+    rows: PropTypes.string,
+    cols: PropTypes.string,
+    options: PropTypes.array,
+};
+
 export default Input;
+
+
+/*
+<input
+        name={name}
+        className={"form-control " + getClassName()}
+        onBlur={onBlur}
+        onChange={handleChange}
+        placeholder={placeholder} />
+*/

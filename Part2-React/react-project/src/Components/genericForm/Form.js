@@ -1,55 +1,53 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useImperativeHandle } from 'react';
 import { Alert } from 'react-bootstrap';
 import _ from 'lodash';
+import PropTypes from 'prop-types';
 
 export const FormContext = createContext();
 
-function Form(props) {
-
+function Form({ children, doIt, formRef, showErrorLabel, showStatusAlert }) {
+    const [values, setValues] = useState({});
+    const [errors, setErrors] = useState({});
+    const [isRender, setIsRender] = useState({});
     const [showFormErrorAlert, setShowFormErrorAlert] = useState(false);
     const [showFormSuccessAlert, setShowFormSuccessAlert] = useState(false);
 
+    /* generate ref for children.Because before form submitting,should check validation. */
+    /* to reach childrens value */
     const references = {};
-
     const generateRef = (id) => {
         if (!references.hasOwnProperty(id)) {
             const ref = React.createRef();
             references[id] = ref;
-            //setAa({ ...aa, [id]: ref })
             return ref;
         }
     }
 
-    // const getRef = (id) => {
-    //     return references[id];
-    // }
-
-    const [values, setValues] = useState({});
+    /* FORM VALUES CHANGE */
     const handleFieldChange = (fieldId, value) => {
         setValues({ ...values, [fieldId]: value });
     };
 
-    const [errors, setErrors] = useState({});
+    /* FORM ERRORS */
     const handleSetErrors = (fieldId, value) => {
         setErrors({ ...errors, [fieldId]: value });
     };
 
+    /* Input had errors but then input value not wrong,should remove input error  */
     const removeError = (key) => {
         setErrors(_.omit(errors, [key]))
     }
 
+    /* When form submitting.Before the form submitting,should doing check validation */
     const handleSubmit = (event) => {
         event.preventDefault();
-        //references
         let __errors = {}
         for (let refName in references) {
             const reference = references[refName].current;
             const checkValidation = reference.checkValidation(reference.value)
             if (!_.isEmpty(checkValidation)) __errors = { ...__errors, [refName]: checkValidation }
-            // console.log("CHECK", checkValidation)
         }
         setErrors(__errors);
-        console.log("errors", __errors)
         if (!_.isEmpty(__errors)) {
             setShowFormSuccessAlert(false);
             setShowFormErrorAlert(true)
@@ -57,25 +55,26 @@ function Form(props) {
         else {
             setShowFormErrorAlert(false);
             setShowFormSuccessAlert(true);
-            props.doIt(values);
+            doIt(values);
         }
-
-        // references.map(reference => {
-        //     const ref = reference.current;
-        //     return ref.checkValidation(ref.value);
-        // })
     }
 
-    
-    // control for which input is render.
-    const [isRender, setIsRender] = useState({});
+    // control for which input is rendered.
     const handleSetIsRender = (fieldId, value) => {
         setIsRender({ ...isRender, [fieldId]: value });
     };
 
+    // for accessing data in parent component
+    useImperativeHandle(formRef, () => ({
+        values,
+        errors,
+        isRender
+    }));
 
     return (
         <React.Fragment>
+
+            {/* FORM */}
             <form onSubmit={handleSubmit} autoComplete="off" >
                 <FormContext.Provider
                     value={{
@@ -85,16 +84,18 @@ function Form(props) {
                         generateRef,
                         removeError,
                         errors,
-                        showErrorLabel: props.showErrorLabel,
+                        showErrorLabel: showErrorLabel,
                         handleSetIsRender,
                         isRender
                     }}
                 >
-                    {props.children}
+                    {children}
                 </FormContext.Provider>
             </form>
-            {
-                props.showStatusAlert &&
+            {/* END OF FORM */}
+
+            {/* FOR ALERT */}
+            {showStatusAlert &&
                 <React.Fragment>
                     {showFormErrorAlert &&
                         <Alert variant="danger" onClose={() => setShowFormErrorAlert(false)} dismissible>
@@ -109,41 +110,25 @@ function Form(props) {
                         </Alert>}
                 </React.Fragment>
             }
+            {/* END OF FOR ALERT */}
 
         </React.Fragment>
     )
 }
 
+Form.defaultProps = {
+    className: "",
+    showErrorLabel: true,
+    showStatusAlert: true
+};
+
+Form.propTypes = {
+    className: PropTypes.string,
+    showErrorLabel: PropTypes.bool,
+    showStatusAlert: PropTypes.bool,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]).isRequired
+};
 export default Form;
-
-
-// import PropTypes from 'prop-types';
-// Form.defaultProps = {
-//     className: "",
-//     mode: "onSubmit",
-//     reValidateMode: "onChange",
-//     defaultValues: {},
-//     criteriaMode: "firstError",
-//     shouldFocusError: true,
-//     shouldUnregister: true,
-//     onLoadValidation: false
-//     // resolver: undefined,
-//     // context: undefined,
-//     // onSubmit,
-//     // schema,
-//     // formRef,
-//   };
-
-  // Form.propTypes = {
-  //   header: PropTypes.oneOfType([
-  //       PropTypes.string,
-  //       PropTypes.node
-  //   ]),
-  //   footer: PropTypes.oneOfType([
-  //       PropTypes.string,
-  //       PropTypes.node
-  //   ]),
-  //   collapsable: PropTypes.bool,
-  //   backgroundColor: PropTypes.string,
-  //   textColor: PropTypes.string
-  // };
