@@ -12,7 +12,7 @@ function App() {
     <React.Fragment>
 
       <Form doIt={() => console.log("ÇALIŞACAK")} showErrorLabel={true} showStatusAlert={true}>
-        <Input type="input" name="name" validate={{ customValidate: (inputValue) => inputValue === "a" }} />
+        <Input type="input" className="xxx" name="name" validate={{ customValidate: (inputValue) => inputValue === "a" }} />
         {/* <Input name="name" validate={{ customValidate: { value: (inputValue) => inputValue === "a", message: "Csasds" }, minLength: { value: 3, message: "MİNNNNN" } }} /> */}
         {/* <Input name="name" validate={{ required: true, minLength: { value: 5, message: "Minnn" } }} /> */}
         <Input type="input" name="surname" validate={{ minLength: { value: 5, message: "Minnnaaa" } }} />

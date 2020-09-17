@@ -6,7 +6,7 @@ import * as DefaultValidationMessage from './DefaultValidationMessages';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 
-function Input({ name, validate, type, placeholder, rows, cols, options }) {
+function Input({ name, validate, type, placeholder, rows, cols, options, className }) {
 
     const formContext = useContext(FormContext);
     const { generateRef, handleSetIsRender, onChange, removeError, handleSetErrors, isRender, errors, showErrorLabel } = formContext;
@@ -84,7 +84,7 @@ function Input({ name, validate, type, placeholder, rows, cols, options }) {
                     <input
                         type="text" //for now i just allowed this type
                         name={name}
-                        className={"form-control " + getClassName()}
+                        className={"form-control " + className + " " + getClassName()}
                         onBlur={onBlur}
                         onChange={handleChange}
                         placeholder={placeholder} />
@@ -134,7 +134,7 @@ function Input({ name, validate, type, placeholder, rows, cols, options }) {
 
 Input.defaultProps = {
     className: "",
-    type: "text",
+    type: "input",
     placeholder: "",
     rows: "4",
     cols: "50",
@@ -143,7 +143,7 @@ Input.defaultProps = {
 
 Input.propTypes = {
     className: PropTypes.string,
-    type: PropTypes.string,
+    type: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
     validate: PropTypes.object,
     placeholder: PropTypes.string,
