@@ -1,6 +1,6 @@
 import React from 'react';
 import Form from '../../genericForm/Form';
-import Input from '../../genericForm/inputTypes/Input';
+import Input from '../../genericForm/Input';
 
 function GuestBookFormWithGenericFormComponent({ onAddNewEntry }) {
 
@@ -11,7 +11,7 @@ function GuestBookFormWithGenericFormComponent({ onAddNewEntry }) {
 
     return (
         <div className="guestbook-form text-center">
-            <Form doIt={handleSubmit} showErrorLabel={true} showStatusAlert={true} showErrorLabel={true} showStatusAlert={true}>
+            <Form doIt={handleSubmit} showErrorLabel={true} showStatusAlert={true}>
 
                 <div className="form-group">
                     <Input

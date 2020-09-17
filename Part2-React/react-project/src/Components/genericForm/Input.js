@@ -1,8 +1,8 @@
 import React, { useContext, useImperativeHandle, useEffect, useState } from 'react'
-import { FormContext } from '../Form';
-
-import * as Validation from '../Validation';
-import * as DefaultValidationMessage from '../DefaultValidationMessages';
+import { FormContext } from './Form';
+import ErrorLabel from './ErrorLabel';
+import * as Validation from './Validation';
+import * as DefaultValidationMessage from './DefaultValidationMessages';
 import _ from 'lodash';
 
 function Input(props) {
@@ -65,16 +65,6 @@ function Input(props) {
             formContext.handleSetErrors(props.name, check)
     }
 
-    const getError = () => {
-        const fieldError = formContext.errors[props.name]
-        if (fieldError) {
-            for (let key in fieldError) {
-                return fieldError[key];
-            }
-        }
-        return false;
-    }
-
     const onBlur = (event) => {
         checkValidationAndSetErrors(event.target.value);
         formContext.handleSetIsRender(props.name, true);
@@ -135,7 +125,7 @@ function Input(props) {
                 onBlur={onBlur}
                 onChange={handleChange}
                 placeholder={props.placeholder} /> */}
-            { formContext.showErrorLabel && getError() && < small className="form-text text-danger" >{getError()}</small>}
+            { formContext.showErrorLabel && <ErrorLabel formContext={formContext} name={props.name} />}
         </React.Fragment>
     )
 }

@@ -98,7 +98,7 @@ function Form(props) {
                 <React.Fragment>
                     {showFormErrorAlert &&
                         <Alert variant="danger" onClose={() => setShowFormErrorAlert(false)} dismissible>
-                            <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+                            <Alert.Heading> You got an error!</Alert.Heading>
                             <pre>{JSON.stringify(errors, null, 2)}</pre>
                         </Alert>}
 

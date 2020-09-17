@@ -1,10 +1,19 @@
 import React from 'react'
 
-function ErrorLabel() {
+function ErrorLabel({formContext,name}) {
+
+    const getError = () => {
+        const fieldError = formContext.errors[name]
+        if (fieldError) {
+            for (let key in fieldError) {
+                return fieldError[key];
+            }
+        }
+        return false;
+    }
+
     return (
-        < small className="form-text text-danger" >
-            {/* {getError("name")[0].message} */}
-        </small>
+        getError() && < small className="form-text text-danger" >{getError()}</small>
     )
 }
 export default ErrorLabel;

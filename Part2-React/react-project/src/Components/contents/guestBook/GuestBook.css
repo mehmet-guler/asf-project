@@ -13,6 +13,8 @@
     width: 40%;
     margin: 20px;
     padding: 15px;
+    max-height: 400px;
+    overflow: auto;
 }
 
 .guestbook-entries {
@@ -21,7 +23,7 @@
     background-color: var(--black);
     border-radius: 3px;
     padding: 15px;
-    max-height: 351px;
+    max-height: 400px;
     overflow: auto;
 }
 

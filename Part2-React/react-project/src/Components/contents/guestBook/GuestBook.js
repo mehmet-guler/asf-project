@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './GuestBook.css';
-import GuestBookForm from './GuestBookForm';
+// import GuestBookForm from './GuestBookForm';
 import GuestBookEntries from './GuestBookEntries';
 import GuestBookFormWithGenericFormComponent from './GuestBookFormWithGenericFormComponent';
 
