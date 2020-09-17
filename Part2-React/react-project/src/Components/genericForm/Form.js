@@ -1,15 +1,13 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState } from 'react';
+import { Alert } from 'react-bootstrap';
 import _ from 'lodash';
 
 export const FormContext = createContext();
 
 function Form(props) {
 
-    useEffect(() => {
-        console.log("geldi")
-
-    }, [])
-
+    const [showFormErrorAlert, setShowFormErrorAlert] = useState(false);
+    const [showFormSuccessAlert, setShowFormSuccessAlert] = useState(false);
 
     const references = {};
 
@@ -33,8 +31,6 @@ function Form(props) {
 
     const [errors, setErrors] = useState({}); // first value will be null.If initial state is null,we can first className set null
     const handleSetErrors = (fieldId, value) => {
-        console.log("1", fieldId)
-        console.log("2", value)
         setErrors({ ...errors, [fieldId]: value });
     };
 
@@ -45,21 +41,23 @@ function Form(props) {
     const handleSubmit = (event) => {
         event.preventDefault();
         //references
-        console.log("references", references)
-        console.log("values", values)
         let __errors = {}
         for (let refName in references) {
-            console.log("refname", refName)
             const reference = references[refName].current;
             const checkValidation = reference.checkValidation(reference.value)
-            console.log("CHECKL", checkValidation)
             if (!_.isEmpty(checkValidation)) __errors = { ...__errors, [refName]: checkValidation }
             // console.log("CHECK", checkValidation)
         }
         setErrors(__errors);
-        console.log("errors", errors)
-        if (!_.isEmpty(errors)) console.log("Hata mevcut")
-        else props.doIt();
+        if (!_.isEmpty(errors)) {
+            setShowFormSuccessAlert(false);
+            setShowFormErrorAlert(true)
+        }
+        else {
+            setShowFormErrorAlert(false);
+            setShowFormSuccessAlert(true);
+            props.doIt();
+        }
 
         // references.map(reference => {
         //     const ref = reference.current;
@@ -68,14 +66,11 @@ function Form(props) {
     }
 
     // console.log("VALUEs", values)
-    console.log("Errors", errors)
 
 
     return (
         <React.Fragment>
-            <button onClick={() => console.log("err", errors)}>Tıkla2</button>
-            <form onSubmit={handleSubmit}>
-                <button onClick={() => console.log("REF", references)}>Tıkla</button>
+            <form onSubmit={handleSubmit} autoComplete="off" >
                 <FormContext.Provider
                     value={{
                         values,
@@ -84,13 +79,30 @@ function Form(props) {
                         //validation: (a) => console.log("a", a),
                         generateRef,
                         removeError,
-                        errors
+                        errors,
+                        showErrorLabel: props.showErrorLabel
                     }}
                 >
                     {props.children}
-                    <button type="submit" >Submit</button>
                 </FormContext.Provider>
             </form>
+            {
+                props.showStatusAlert &&
+                <React.Fragment>
+                    {showFormErrorAlert &&
+                        <Alert variant="danger" onClose={() => setShowFormErrorAlert(false)} dismissible>
+                            <Alert.Heading>Oh snap! You got an error!</Alert.Heading>
+                            <pre>{JSON.stringify(errors, null, 2)}</pre>
+                        </Alert>}
+
+                    {showFormSuccessAlert &&
+                        <Alert variant="success" onClose={() => setShowFormSuccessAlert(false)} dismissible>
+                            <Alert.Heading>Form submit succeed</Alert.Heading>
+                            <pre>{JSON.stringify(values, null, 2)}</pre>
+                        </Alert>}
+                </React.Fragment>
+            }
+
         </React.Fragment>
     )
 }

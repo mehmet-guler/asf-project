@@ -33,7 +33,6 @@ function Input(props) {
     }));
 
     useEffect(() => {
-        console.log("girdi")
         setRef(formContext.generateRef(props.name))
     }, [setRef, formContext, props.name])
 
@@ -50,22 +49,14 @@ function Input(props) {
                 const key = keys[i]
                 const keyValue = typeof props.validate[key] === "object" ? props.validate[key]["value"] : props.validate[key];;
                 const message = typeof props.validate[key] === "object" ? props.validate[key]["message"] : DefaultValidationMessage[key];
-                // console.log("key", key)
-                // console.log("keyValue", keyValue)
-                // console.log("message", message)
-                // console.log(typeof props.validate[key])
                 if (key in Validation) {
                     const validationResponse = Validation[key](inputValue, keyValue)
                     if (!validationResponse) errors[key] = message;
                 }
-
-                console.log("errors", errors)
-                // //break;
             }
             return errors;
         }
     }
-    // console.log(props.validate(event.target.value))
 
     const checkValidationAndSetErrors = (inputValue) => {
         const check = checkValidation(inputValue);
@@ -76,33 +67,25 @@ function Input(props) {
     }
 
     const getError = () => {
-        console.log("errors", formContext.errors[props.name])
         const fieldError = formContext.errors[props.name]
         if (fieldError) {
-            
+            for (let key in fieldError) {
+                return fieldError[key];
+            }
         }
         return false;
     }
 
-
-    // const getError = (name) => {
-    //     if (errors.length > 0) {
-    //         const error = errors.filter(error => error.name === name);
-    //         if (error.length > 0) return error;
-    //         else return false
-    //     }
-    //     return false
-    // }
-
-    
-    console.log("INPUT errors", formContext.errors[props.name])
-
     return (
         <React.Fragment>
-            <button className="btn btn-primary" onClick={getError}>TIKLA 3</button>
-            <input name={props.name} onBlur={(event) => checkValidationAndSetErrors(event.target.value)} onChange={handleChange} />
+            <input
+                name={props.name}
+                className="form-control"
+                onBlur={(event) => checkValidationAndSetErrors(event.target.value)}
+                onChange={handleChange}
+                placeholder={props.placeholder} />
             {/* <input onBlur={() => onSetName(name)} type="text" className={"form-control"} placeholder="Name" value={name} onChange={(event) => onSetName(event.target.value)} /> */}
-            {/* { props.showErrorLabel &&  getError() && < small className="form-text text-danger" >{errors(props.name)[0].message}</small>}  */}
+            { formContext.showErrorLabel && getError() && < small className="form-text text-danger" >{getError()}</small>}
         </React.Fragment>
     )
 }

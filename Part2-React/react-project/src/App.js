@@ -11,11 +11,14 @@ function App() {
   return (
     <React.Fragment>
 
-      <Form doIt={()=>console.log("ÇALIŞACAK")}>
-        <Input name="name" validate={{ customValidate: (inputValue) => inputValue === "a" ,minLength:4}} showErrorLabel={true} />
+      <Form doIt={() => console.log("ÇALIŞACAK")} showErrorLabel={true} showStatusAlert={true}>
+        <Input name="name" validate={{ customValidate: (inputValue) => inputValue === "a" }} />
         {/* <Input name="name" validate={{ customValidate: { value: (inputValue) => inputValue === "a", message: "Csasds" }, minLength: { value: 3, message: "MİNNNNN" } }} /> */}
         {/* <Input name="name" validate={{ required: true, minLength: { value: 5, message: "Minnn" } }} /> */}
         <Input name="surname" validate={{ minLength: { value: 5, message: "Minnnaaa" } }} />
+
+        <button type="submit" className="btn btn-danger" >Submit</button>
+
       </Form>
 
       {/* <Header />
