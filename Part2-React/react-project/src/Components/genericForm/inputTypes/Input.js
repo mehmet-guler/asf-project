@@ -47,7 +47,7 @@ function Input(props) {
             for (let i = 0; i < Object.keys(props.validate).length; i++) {
                 const key = keys[i]
                 const keyValue = typeof props.validate[key] === "object" ? props.validate[key]["value"] : props.validate[key];;
-                const message = typeof props.validate[key] === "object" ? props.validate[key]["message"] : DefaultValidationMessage[key];
+                const message = typeof props.validate[key] === "object" && props.validate[key]["message"] ? props.validate[key]["message"] : DefaultValidationMessage[key];
                 if (key in Validation) {
                     const validationResponse = Validation[key](inputValue, keyValue)
                     if (!validationResponse) errors[key] = message;

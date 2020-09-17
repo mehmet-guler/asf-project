@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './GuestBook.css';
 import GuestBookForm from './GuestBookForm';
 import GuestBookEntries from './GuestBookEntries';
+import GuestBookFormWithGenericFormComponent from './GuestBookFormWithGenericFormComponent';
 
 const default_entries = [
     {
@@ -10,28 +11,28 @@ const default_entries = [
         date: new Date().getTime(),
         subject: "Test Subject",
         message: "Lorem ipsum dolor sit amet",
-        s:4
+        s: 4
     }, {
         id: new Date().getTime() + Math.random(),
         name: "GuestBookUser",
         date: new Date().getTime(),
         subject: "Test Subject",
         message: "Lorem ipsum dolor sit amet"
-        ,s:1
+        , s: 1
     }, {
         id: new Date().getTime() + Math.random(),
         name: "GuestBookUser",
         date: new Date().getTime(),
         subject: "Test Subject",
         message: "Lorem ipsum dolor sit amet",
-        s:3
+        s: 3
     }, {
         id: new Date().getTime() + Math.random(),
         name: "GuestBookUser",
         date: new Date().getTime(),
         subject: "Test Subject",
         message: "Lorem ipsum dolor sit amet",
-        s:2
+        s: 2
     }
 ];
 
@@ -59,7 +60,11 @@ function GuestBook() {
             <h1 className="text-center">GUESTBOOK</h1>
             <div className="flex-container">
 
-                <GuestBookForm onAddNewEntry={onAddNewEntry} />
+                {/* New Generic Method */}
+                <GuestBookFormWithGenericFormComponent onAddNewEntry={onAddNewEntry} />
+
+                {/* Old Method */}
+                {/* <GuestBookForm onAddNewEntry={onAddNewEntry} /> */}
                 <GuestBookEntries entries={entries} />
 
             </div>

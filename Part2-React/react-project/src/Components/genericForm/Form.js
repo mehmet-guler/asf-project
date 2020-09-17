@@ -57,7 +57,7 @@ function Form(props) {
         else {
             setShowFormErrorAlert(false);
             setShowFormSuccessAlert(true);
-            props.doIt();
+            props.doIt(values);
         }
 
         // references.map(reference => {

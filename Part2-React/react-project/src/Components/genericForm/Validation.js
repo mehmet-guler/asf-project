@@ -1,5 +1,4 @@
 function required(value) {
-    console.log("girdi")
     return value ? true : false;
 }
 
