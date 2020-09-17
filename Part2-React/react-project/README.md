@@ -54,6 +54,54 @@ import Form from './Form';
  </Form>
 ```
 
+> If we want to add a som designs
+```javascript
+
+<Form doIt={handleSubmit} showErrorLabel={true} showStatusAlert={true} formRef={formRef}>
+<div className="form-group">
+    <label>Name</label>
+    <Input
+        type="input"
+        name="name"
+        validate={{
+            minLength: { value: 3, message: "This field must have a minimum of 3 characters" },
+            maxLength: { value: 30, message: "This field must have a maxium of 30 characters" },
+              required: true
+         }}
+          placeholder="Name..."
+      />
+</div>
+<div className="form-group">
+    <label>Sıbject</label>
+     <Input
+        type="input"
+        name="subject"
+        validate={{
+             customValidate: { value: (inputValue) => inputValue === "info", message: "This fields value must be a info " },
+            required: true
+        }}
+        placeholder="Surname..."
+    />
+</div> 
+<div className="form-group">
+    <label>Message</label>
+    <Input
+        type="textarea"
+        name="message"
+        validate={{
+            minLength: { value: 15, message: "This field must have a minimum of 15 characters!" },
+             required: { value: true, message: "Message field must be a required!" }
+            }}
+        rows="3"
+        cols="50"
+        placeholder="Your message..."
+    />
+</div>
+    <button type="submit" className="button green btn-block mb-2" >SEND</button>
+ </Form>
+
+```
+
 ### Form Props
 - classname : form css class 
 (string - optional)
@@ -188,10 +236,6 @@ customValidate:{value:(inputValue)=>inputValue === "some stuff",message:"Custom 
 minLength:5
 }} />
 ```
-
-
-
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
