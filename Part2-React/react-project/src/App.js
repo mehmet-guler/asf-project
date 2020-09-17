@@ -12,10 +12,12 @@ function App() {
     <React.Fragment>
 
       <Form doIt={() => console.log("ÇALIŞACAK")} showErrorLabel={true} showStatusAlert={true}>
-        <Input name="name" validate={{ customValidate: (inputValue) => inputValue === "a" }} />
+        <Input type="input" name="name" validate={{ customValidate: (inputValue) => inputValue === "a" }} />
         {/* <Input name="name" validate={{ customValidate: { value: (inputValue) => inputValue === "a", message: "Csasds" }, minLength: { value: 3, message: "MİNNNNN" } }} /> */}
         {/* <Input name="name" validate={{ required: true, minLength: { value: 5, message: "Minnn" } }} /> */}
-        <Input name="surname" validate={{ minLength: { value: 5, message: "Minnnaaa" } }} />
+        <Input type="input" name="surname" validate={{ min:3,max:10 }} />
+        <Input type="textarea" name="description" validate={{ minLength: { value: 15, message: "Textarea Minn length" } }} rows="3" cols="50" />
+        <Input type="selects" name="carType" validate={{ required:{value:true,message:"SELECT REQU"} }} options={[{ value: "", label: "Please Select Car Type" }, { value: "volvo", label: "Volvo" }, { value: "citroen", label: "Citroen" }, { value: "mercedes", label: "Mercedes" }]} />
 
         <button type="submit" className="btn btn-danger" >Submit</button>
 

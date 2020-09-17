@@ -89,15 +89,52 @@ function Input(props) {
         }
     }
 
+    const getInput = () => {
+        switch (props.type) {
+            case "input":
+                return (<input
+                    name={props.name}
+                    className={"form-control " + getClassName()}
+                    onBlur={onBlur}
+                    onChange={handleChange}
+                    placeholder={props.placeholder} />)
+            case "textarea":
+                return (
+                    <textarea
+                        name={props.name}
+                        className={"form-control " + getClassName()}
+                        onBlur={onBlur}
+                        onChange={handleChange}
+                        placeholder={props.placeholder}
+                        rows={props.rows}
+                        cols={props.cols}
+                    ></textarea>
+                )
+            case "select":
+                return (
+                    <select
+                        name={props.name}
+                        className={"form-control " + getClassName()}
+                        onBlur={onBlur}
+                        onChange={handleChange}
+                    >
+                        {props.options.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
+                    </select>
+                )
+            default:
+                return <p>Error! This is type is not supported.Be sure type is input,select,textarea</p>;
+        }
+    }
+
     return (
         <React.Fragment>
-            <input
+            {getInput()}
+            {/* <input
                 name={props.name}
                 className={"form-control " + getClassName()}
                 onBlur={onBlur}
                 onChange={handleChange}
-                placeholder={props.placeholder} />
-            {/* <input onBlur={() => onSetName(name)} type="text" className={"form-control"} placeholder="Name" value={name} onChange={(event) => onSetName(event.target.value)} /> */}
+                placeholder={props.placeholder} /> */}
             { formContext.showErrorLabel && getError() && < small className="form-text text-danger" >{getError()}</small>}
         </React.Fragment>
     )
