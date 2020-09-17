@@ -19,11 +19,10 @@ function Input(props) {
         setValue(inputValue)
         //validation
         //validation(event)
-        checkValidationAndSetErrors(inputValue)
+        formContext.handleSetIsRender(props.name, true);
+        checkValidationAndSetErrors(inputValue);
         // console.log(checkValidation(event.target.value))
     };
-
-
 
 
     useImperativeHandle(ref, () => ({
@@ -76,12 +75,26 @@ function Input(props) {
         return false;
     }
 
+    const onBlur = (event) => {
+        checkValidationAndSetErrors(event.target.value);
+        formContext.handleSetIsRender(props.name, true);
+    }
+
+    const getClassName = () => {
+        // if input is rendered and has a errors
+        if (!formContext.isRender[props.name]) return "";
+        else {
+            if (formContext.errors[props.name]) return "is-invalid";
+            else return "is-valid";
+        }
+    }
+
     return (
         <React.Fragment>
             <input
                 name={props.name}
-                className="form-control"
-                onBlur={(event) => checkValidationAndSetErrors(event.target.value)}
+                className={"form-control " + getClassName()}
+                onBlur={onBlur}
                 onChange={handleChange}
                 placeholder={props.placeholder} />
             {/* <input onBlur={() => onSetName(name)} type="text" className={"form-control"} placeholder="Name" value={name} onChange={(event) => onSetName(event.target.value)} /> */}

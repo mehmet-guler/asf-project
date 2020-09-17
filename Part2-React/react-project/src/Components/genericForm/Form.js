@@ -29,7 +29,7 @@ function Form(props) {
         setValues({ ...values, [fieldId]: value });
     };
 
-    const [errors, setErrors] = useState({}); // first value will be null.If initial state is null,we can first className set null
+    const [errors, setErrors] = useState({});
     const handleSetErrors = (fieldId, value) => {
         setErrors({ ...errors, [fieldId]: value });
     };
@@ -49,7 +49,8 @@ function Form(props) {
             // console.log("CHECK", checkValidation)
         }
         setErrors(__errors);
-        if (!_.isEmpty(errors)) {
+        console.log("errors", __errors)
+        if (!_.isEmpty(__errors)) {
             setShowFormSuccessAlert(false);
             setShowFormErrorAlert(true)
         }
@@ -65,7 +66,12 @@ function Form(props) {
         // })
     }
 
-    // console.log("VALUEs", values)
+    
+    // control for which input is render.
+    const [isRender, setIsRender] = useState({});
+    const handleSetIsRender = (fieldId, value) => {
+        setIsRender({ ...isRender, [fieldId]: value });
+    };
 
 
     return (
@@ -76,11 +82,12 @@ function Form(props) {
                         values,
                         onChange: handleFieldChange,
                         handleSetErrors,
-                        //validation: (a) => console.log("a", a),
                         generateRef,
                         removeError,
                         errors,
-                        showErrorLabel: props.showErrorLabel
+                        showErrorLabel: props.showErrorLabel,
+                        handleSetIsRender,
+                        isRender
                     }}
                 >
                     {props.children}
@@ -110,25 +117,33 @@ function Form(props) {
 export default Form;
 
 
-
-// const getFormFields = () => {
-//     return React.Children.map(children, child => {
-//       const type =
-//         typeof child.type === "string" ? child.type : child.type.name;
-//       if (FORMTYPES[type.toUpperCase()]) {
-//         // child'ın tipi FORMGROUP yada FORMCHECK(yeni oluşturulacak tipler FORMTYPES içine eklenecek) ise yeni element oluşturup propsları ve register'ı gönder
-//         return React.createElement(child.type, {
-//           ...{
-//             ...child.props,
-//             register: register,
-//             control: control,
-//             errors: errors,
-//             onLoadValidation:onLoadValidation,
-//             key: child.props.name
-//           }
-//         });
-//       } else {
-//         return child;
-//       }
-//     });
+// import PropTypes from 'prop-types';
+// Form.defaultProps = {
+//     className: "",
+//     mode: "onSubmit",
+//     reValidateMode: "onChange",
+//     defaultValues: {},
+//     criteriaMode: "firstError",
+//     shouldFocusError: true,
+//     shouldUnregister: true,
+//     onLoadValidation: false
+//     // resolver: undefined,
+//     // context: undefined,
+//     // onSubmit,
+//     // schema,
+//     // formRef,
 //   };
+
+  // Form.propTypes = {
+  //   header: PropTypes.oneOfType([
+  //       PropTypes.string,
+  //       PropTypes.node
+  //   ]),
+  //   footer: PropTypes.oneOfType([
+  //       PropTypes.string,
+  //       PropTypes.node
+  //   ]),
+  //   collapsable: PropTypes.bool,
+  //   backgroundColor: PropTypes.string,
+  //   textColor: PropTypes.string
+  // };
