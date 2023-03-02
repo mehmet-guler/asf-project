@@ -152,90 +152,100 @@ const handleSubmit = ({ name, subject, message }) => {
 
 ### Validation Using Examples
 ```javascript
-// If we use validate like this,the error messages are come default validation messages
-<Input 
-type="input" 
-className="custom-form-control" 
-name="username" 
-placeholder="Username ..."
-validate={{ minLength:5 }} />
+{/* If we use validate like this,the error messages are come default validation messages */}
+      <Input
+        type="input"
+        className="custom-form-control"
+        name="username"
+        placeholder="Username ..."
+        validate={{ minLength: 5 }}
+      />
 
-//If we want give a our validation message, use like this ;
-<Input 
-type="input" 
-className="custom-form-control" 
-name="username" 
-placeholder="Username ..."
-validate={{ minLength:{value:5 ,message:"Our Custom Validation Message" }} />
+      {/* If we want give a our validation message, use like this ; */}
+      <Input
+        type="input"
+        className="custom-form-control"
+        name="username"
+        placeholder="Username ..."
+        validate={{ minLength: { value: 5, message: "Our Custom Validation Message" } }}
+      />
 
-// Standart validation examples
-// We can define multiple validation
-// Whichever validation is written first, the error message comes from it
-<Input 
-type="input" 
-className="custom-form-control" 
-name="username" 
-placeholder="Username ..."
-validate={{ 
-required:true, // required:{value:true,message:"Custom required message}"
-minLength:{value:5 ,message:"Our Custom Validation Message"},
-maxLength:{value:15,message:"Custom max length message"}
-}} />
+      {/* 
+        Standart validation examples
+        We can define multiple validation
+        Whichever validation is written first, the error message comes from it 
+      */}
+      <Input
+        type="input"
+        className="custom-form-control"
+        name="username"
+        placeholder="Username ..."
+        validate={{
+          required: true, // required:{value:true,message:"Custom required message}"
+          minLength: { value: 5, message: "Our Custom Validation Message" },
+          maxLength: { value: 15, message: "Custom max length message" }
+        }}
+      />
 
-// TextArea input
-<Input 
-type="textarea" 
-name="description" 
-placeholder="Description ..."
-validate={{ 
-required:true, // required:{value:true,message:"Custom required message}"
-minLength:{value:5 ,message:"Our Custom Validation Message"},
-maxLength:{value:15,message:"Custom max length message"}
-}}
-rows="4"
-cols="5"
-/>
-// Select input
-<Input 
-type="select" 
-name="programmingLanguage" 
-placeholder="Programming Language ..."
-validate={{ 
-required:true, // required:{value:true,message:"Custom required message}"
-}}
-options:{
-    [
-        {value:"",label:"Please Select a Programming Language"},
-        {value:"js",label:"Javascript"},
-        {value:"java",label:"Java"},
-        {value:"csharp",label:"C#"},
-        {value:"phyton",label:"Phyton"},
-    ]
-}
-/>
+      {/* TextArea input */}
+      <Input
+        type="textarea"
+        name="description"
+        placeholder="Description ..."
+        validate={{
+          required: true, // required:{value:true,message:"Custom required message}"
+          minLength: { value: 5, message: "Our Custom Validation Message" },
+          maxLength: { value: 15, message: "Custom max length message" }
+        }}
+        rows="4"
+        cols="5"
+      />
 
-// Custom Validation Example
-// The important point is,'customValidate' key
+      {/* Select input */}
+      <Input
+        type="select"
+        name="programmingLanguage"
+        placeholder="Programming Language ..."
+        validate={{
+          required: true // required:{value:true,message:"Custom required message}"
+        }}
+        options={[
+          { value: "", label: "Please Select a Programming Language" },
+          { value: "js", label: "Javascript" },
+          { value: "java", label: "Java" },
+          { value: "csharp", label: "C#" },
+          { value: "phyton", label: "Phyton" }
+        ]}
+      />
 
-<Input 
-type="input" 
-className="custom-form-control" 
-name="username" 
-placeholder="Username ..."
-validate={{ 
-customValidate:(inputValue)=>inputValue === "some stuff",
-minLength:5
-}} />
+      {/* 
+        Custom Validation Example
+        The important point is,'customValidate' key 
+      */}
+      <Input
+        type="input"
+        className="custom-form-control"
+        name="username"
+        placeholder="Username ..."
+        validate={{
+          customValidate: (inputValue) => inputValue === "some stuff",
+          minLength: 5
+        }}
+      />
 
-<Input 
-type="input" 
-className="custom-form-control" 
-name="username" 
-placeholder="Username ..."
-validate={{ 
-customValidate:{value:(inputValue)=>inputValue === "some stuff",message:"Custom Validation Error Message"},
-minLength:5
-}} />
+      <Input
+        type="input"
+        className="custom-form-control"
+        name="username"
+        placeholder="Username ..."
+        validate={{
+          customValidate: {
+            value: (inputValue) => inputValue === "some stuff",
+            message: "Custom Validation Error Message"
+          },
+          minLength: 5
+        }}
+      />
 ```
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
