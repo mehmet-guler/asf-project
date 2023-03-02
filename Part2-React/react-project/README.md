@@ -54,7 +54,7 @@ import Form from './Form';
  </Form>
 ```
 
-> If we want to add a som designs
+> If we want to add a some designs
 ```javascript
 
 <Form doIt={handleSubmit} showErrorLabel={true} showStatusAlert={true} formRef={formRef}>
@@ -72,7 +72,7 @@ import Form from './Form';
       />
 </div>
 <div className="form-group">
-    <label>Sıbject</label>
+    <label>Subject</label>
      <Input
         type="input"
         name="subject"
