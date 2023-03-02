@@ -6,16 +6,17 @@ In addition, the developers who will use the form will be easier to use.Develope
 ### How to Use ? 
 ```javascript
 import Form from './Form';
- const handleSubmit = ({ name, subject, message }) => {
-        const newEntry = {
-            id: new Date().getTime() + Math.random(),
-            name: name,
-            subject: subject,
-            message: message,
-            date: new Date().getTime()
-        };
-        onAddNewEntry(newEntry);
-    }
+
+const handleSubmit = ({ name, subject, message }) => {
+  const newEntry = {
+    id: new Date().getTime() + Math.random(),
+    name: name,
+    subject: subject,
+    message: message,
+    date: new Date().getTime()
+  };
+  onAddNewEntry(newEntry);
+};
     
 <Form doIt={handleSubmit} showErrorLabel={true} showStatusAlert={true} formRef={formRef}>
     <Input
